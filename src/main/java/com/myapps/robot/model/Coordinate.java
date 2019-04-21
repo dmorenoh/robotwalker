@@ -5,14 +5,12 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor(staticName = "of")
-public class Coordinate
-{
+public class Coordinate {
     private final Integer xPoint;
     private final Integer yPoint;
 
 
-    public Coordinate plus(final Coordinate distance)
-    {
+    Coordinate plus(final Coordinate distance) {
         return new Coordinate(this.xPoint + distance.xPoint, this.yPoint + distance.yPoint);
     }
 }

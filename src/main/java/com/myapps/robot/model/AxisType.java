@@ -4,12 +4,12 @@ public enum AxisType {
     AXIS_X_POSITIVE(Coordinate.of(1, 0)) {
         @Override
         public AxisType turnLeft() {
-            return AXIS_Y_NEGATIVE;
+            return AXIS_Y_POSITIVE;
         }
 
         @Override
         public AxisType turnRight() {
-            return AXIS_Y_POSITIVE;
+            return AXIS_Y_NEGATIVE;
         }
     },
     AXIS_Y_POSITIVE(Coordinate.of(0, 1)) {
@@ -26,12 +26,12 @@ public enum AxisType {
     AXIS_X_NEGATIVE(Coordinate.of(-1, 0)) {
         @Override
         public AxisType turnLeft() {
-            return AXIS_Y_POSITIVE;
+            return AXIS_Y_NEGATIVE;
         }
 
         @Override
         public AxisType turnRight() {
-            return AXIS_Y_NEGATIVE;
+            return AXIS_Y_POSITIVE;
         }
     },
     AXIS_Y_NEGATIVE(Coordinate.of(0, -1)) {

@@ -2,6 +2,8 @@ package com.myapps.robot
 
 import com.blogspot.toomuchcoding.spock.subjcollabs.Subject
 import com.myapps.robot.command.MovementCommand
+import com.myapps.robot.commandhandler.RobotMovementHandler
+import com.myapps.robot.exceptions.InvalidInstructionsException
 import com.myapps.robot.model.Coordinate
 import spock.lang.Specification
 
@@ -27,8 +29,9 @@ class RobotMovementHandlerSpec extends Specification {
         then: "returns final position as #lastPosition"
             lastPosition==returned.getCurrentPosition()
         where:
-            instructions | lastPosition
-            "FF"         | Coordinate.of(0, 2)
+            instructions    | lastPosition
+            "FF"            | Coordinate.of(0, 2)
+            "FLFFRF"        | Coordinate.of(-2, 2)
 
     }
 }
