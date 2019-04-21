@@ -1,39 +1,63 @@
 package com.myapps.robot.model;
 
-public enum AxisDirection
-{
-    AXIS_X_POSITIVE(AxisDirection.AXIS_Y_POSITIVE, AxisDirection.AXIS_Y_NEGATIVE, Coordinate.of(1, 0)),
-    AXIS_Y_POSITIVE(AxisDirection.AXIS_X_NEGATIVE, AxisDirection.AXIS_X_POSITIVE, Coordinate.of(0, 1)),
-    AXIS_X_NEGATIVE(AxisDirection.AXIS_Y_NEGATIVE, AxisDirection.AXIS_Y_POSITIVE, Coordinate.of(-1, 0)),
-    AXIS_Y_NEGATIVE(AxisDirection.AXIS_X_POSITIVE, AxisDirection.AXIS_X_NEGATIVE, Coordinate.of(0, -1));
+public enum AxisType {
+    AXIS_X_POSITIVE(Coordinate.of(1, 0)) {
+        @Override
+        public AxisType turnLeft() {
+            return AXIS_Y_NEGATIVE;
+        }
 
-    private final AxisDirection left;
-    private final AxisDirection right;
+        @Override
+        public AxisType turnRight() {
+            return AXIS_Y_POSITIVE;
+        }
+    },
+    AXIS_Y_POSITIVE(Coordinate.of(0, 1)) {
+        @Override
+        public AxisType turnLeft() {
+            return AXIS_X_NEGATIVE;
+        }
+
+        @Override
+        public AxisType turnRight() {
+            return AXIS_X_POSITIVE;
+        }
+    },
+    AXIS_X_NEGATIVE(Coordinate.of(-1, 0)) {
+        @Override
+        public AxisType turnLeft() {
+            return AXIS_Y_POSITIVE;
+        }
+
+        @Override
+        public AxisType turnRight() {
+            return AXIS_Y_NEGATIVE;
+        }
+    },
+    AXIS_Y_NEGATIVE(Coordinate.of(0, -1)) {
+        @Override
+        public AxisType turnLeft() {
+            return AXIS_X_NEGATIVE;
+        }
+
+        @Override
+        public AxisType turnRight() {
+            return AXIS_X_POSITIVE;
+        }
+    };
+
     private final Coordinate distance;
 
 
-    AxisDirection(final AxisDirection left, final AxisDirection right, final Coordinate distance)
-    {
-        this.left = left;
-        this.right = right;
+    AxisType(final Coordinate distance) {
         this.distance = distance;
     }
 
+    protected abstract AxisType turnLeft();
 
-    public AxisDirection getLeft()
-    {
-        return left;
-    }
+    protected abstract AxisType turnRight();
 
-
-    public AxisDirection getRight()
-    {
-        return right;
-    }
-
-
-    public Coordinate moveForwardFrom(Coordinate currentPosition)
-    {
+    public Coordinate moveForwardFrom(Coordinate currentPosition) {
         return currentPosition.plus(distance);
     }
 }
